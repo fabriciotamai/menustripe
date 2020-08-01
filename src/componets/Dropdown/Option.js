@@ -18,7 +18,7 @@ export function DropdownOption({ name, content: Content, backgroundHeight}){
 
    const {
 
-       registerOpion,
+       registerOption,
        updateOptionProps,
        deleteOptionById,
        setTargetId,
@@ -32,33 +32,75 @@ export function DropdownOption({ name, content: Content, backgroundHeight}){
            const WareppedContent = () => {
                const contentRef = useRef();
         
-            useEffect(()=>{
+            useEffect(()=>{ 
                 const contentDimensions = contentRef.current.getBoundingClientrect();
                 updateOptionProps(id, {contentDimensions})
             },[])
 
-            return(
+           
+
+          return(
                 <div ref={contentRef}>
                     <Content/>
                 </div>
             )
+           }
+           registerOption({
+               id,
+               optionDimensions,
+               optionCenterX : optionDimensions.x + optionDimensions.width /2 ,
+               WareppedContent,
+               backgroundHeight,
+           });
+           
+           setRegistered(true);
 
+        }else if(registered && optionDimensions){
+            updateOptionProps(id,{
+                optionDimensions,
+                optionCenterX: optionDimensions.x + optionDimensions.width / 2,
+            })
+         
+    
+         }
+    },[
+        registerOption,
+        id,
+        registered,
+        optionDimensions,
+        updateOptionProps,
+        deleteOptionById,
+        backgroundHeight,
+    ]);
+
+          const  handleOpen=() => setTargetId(id);
+           const handleClose =() =>setTargetId(null);
+           const handleTouch = () =>(window.isMobile = true);
+
+           const handleClick= (e) =>{
+               e.preventDefault();
            
 
-
-            return(
-                <div>
-                    <Content/>
-                </div>
-            )
-           }
-       }
-  
+           return targetId ===  id ? handleClose() : handleOpen();
+        };
 
 
-   },[]);
+    
 
-    return(
-    <motion.button className="dropdown-option">{name}</motion.button>
-    );
+    return<motion.button
+        className="dropdown-option"
+        ref={optionHook}
+        onMouseDown={handleClick}
+        onHoverStart={()=> !window.isMobile && handleOpen()}
+        onHoverEnd={()=> !window.isMobile && handleClose()}
+        onTouchStart={ handleTouch}
+        onFocus={handleOpen}
+        onBlur={handleClose}
+        
+>
+    {name}
+    </motion.button>
+    
+   
+
 }
