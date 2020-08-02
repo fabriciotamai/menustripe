@@ -3,7 +3,7 @@ import React from 'react';
 import { Products, Developers, Company} from '../Content';
 
 import {Container, DropdownStyles}  from './styles';
-import {DropdownOption, DropdownProvider}  from '../Dropdown'
+import {DropdownOption, DropdownProvider,DropdownRoot}  from '../Dropdown'
 
 export default function Navbar(){
 
@@ -25,6 +25,8 @@ export default function Navbar(){
                 </li>
             </ul>
         </Container>
+        <DropdownRoot/>
+
         </DropdownStyles>
         </DropdownProvider>
     );

@@ -1,9 +1,11 @@
-import React,{useRef, useState, useContext, useEffect } from 'react';
-
-import {motion} from 'framer-motion';
+import React, {useRef, useState, useContext, useEffect } from 'react';
 
 import { useDimensions} from './dimensions';
 import {Context} from './provider';
+
+import {motion} from 'framer-motion';
+
+
  
 let lastOptionId = 0 ;
 
@@ -29,11 +31,11 @@ export function DropdownOption({ name, content: Content, backgroundHeight}){
 
    useEffect(()=>{
        if(!registered && optionDimensions){
-           const WareppedContent = () => {
+           const WrappedContent = () => {
                const contentRef = useRef();
         
             useEffect(()=>{ 
-                const contentDimensions = contentRef.current.getBoundingClientrect();
+                const contentDimensions = contentRef.current.getBoundingClientRect();
                 updateOptionProps(id, {contentDimensions})
             },[])
 
@@ -49,7 +51,7 @@ export function DropdownOption({ name, content: Content, backgroundHeight}){
                id,
                optionDimensions,
                optionCenterX : optionDimensions.x + optionDimensions.width /2 ,
-               WareppedContent,
+               WrappedContent,
                backgroundHeight,
            });
            
@@ -73,8 +75,8 @@ export function DropdownOption({ name, content: Content, backgroundHeight}){
         backgroundHeight,
     ]);
 
-          const  handleOpen=() => setTargetId(id);
-           const handleClose =() =>setTargetId(null);
+           const  handleOpen = () =>setTargetId(id);
+           const handleClose = () =>setTargetId(null);
            const handleTouch = () =>(window.isMobile = true);
 
            const handleClick= (e) =>{
