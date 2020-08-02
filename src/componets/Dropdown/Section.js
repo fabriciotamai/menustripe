@@ -8,10 +8,10 @@ export function DropdownSection ({option}){
 
     const { updateOptionProps, cachedId } = useContext(Context);
 
-    const { id, optionDimensions,optionCenterx, contentDimensions} = Option;
+    const { id, optionDimensions,optionCenterX, contentDimensions} = option;
 
     const contentWidth = contentDimensions?.width || 0;
-    const x = optionCenterx - contentWidth /2 ;
+    const x = optionCenterX - contentWidth /2 ;
 
     const isActive = cachedId === id;
 

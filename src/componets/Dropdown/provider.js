@@ -7,11 +7,12 @@ export function DropdownProvider({children}){
     const [ targetId, setTargetId] = useState(null);
     const [cachedId, setCachedId] = useState(null);
 
-    const registerOption = useCallback (
-        ({
+    const registerOption = useCallback(
+    ({
+
      id,
      optionDimensions,
-     optionCenterx,
+     optionCenterX,
      WrappedContent,
      backgroundHeight,
 
@@ -21,7 +22,7 @@ export function DropdownProvider({children}){
          {
             id,
             optionDimensions,
-            optionCenterx,
+            optionCenterX,
             WrappedContent,
             backgroundHeight,
          },
@@ -47,15 +48,15 @@ export function DropdownProvider({children}){
 
      const getOptionById = useCallback((id)=>options.find((item)=> item.id === id),[options])
 
-     const deleteOptionById = useCallback ((id)=>
-     {
-         setOptions((items)=> items.filter((item )=> item.id !== id));
+     const deleteOptionById = useCallback ((id)=>{
+     
+         setOptions((items)=> items.filter((item )=> item.id != id));
 },
     [setOptions]
 );
 
     useEffect(()=>{
-        if(targetId !== null)setCachedId(targetId);
+        if(targetId != null)setCachedId(targetId);
     },[targetId]);
 
     
