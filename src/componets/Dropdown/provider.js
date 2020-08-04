@@ -50,13 +50,13 @@ export function DropdownProvider({children}){
 
      const deleteOptionById = useCallback ((id)=>{
      
-         setOptions((items)=> items.filter((item )=> item.id != id));
+         setOptions((items)=> items.filter((item )=> item.id !== id));
 },
     [setOptions]
 );
 
     useEffect(()=>{
-        if(targetId != null)setCachedId(targetId);
+        if(targetId !== null)setCachedId(targetId);
     },[targetId]);
 
     

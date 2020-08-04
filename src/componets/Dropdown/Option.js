@@ -73,9 +73,11 @@ export function DropdownOption({ name, content: Content, backgroundHeight}){
         updateOptionProps,
         deleteOptionById,
         backgroundHeight,
-    ]);
 
-           const  handleOpen = () =>setTargetId(id);
+    ]);
+        useEffect(()=> deleteOptionById(id),[deleteOptionById, id])
+
+           const handleOpen = () =>setTargetId(id);
            const handleClose = () =>setTargetId(null);
            const handleTouch = () =>(window.isMobile = true);
 
@@ -83,7 +85,7 @@ export function DropdownOption({ name, content: Content, backgroundHeight}){
                e.preventDefault();
            
 
-           return targetId ===  id ? handleClose() : handleOpen();
+           return targetId ===  id? handleClose() : handleOpen();
         };
 
 
@@ -95,7 +97,7 @@ export function DropdownOption({ name, content: Content, backgroundHeight}){
         onMouseDown={handleClick}
         onHoverStart={()=> !window.isMobile && handleOpen()}
         onHoverEnd={()=> !window.isMobile && handleClose()}
-        onTouchStart={ handleTouch}
+        onTouchStart={handleTouch}
         onFocus={handleOpen}
         onBlur={handleClose}
         
